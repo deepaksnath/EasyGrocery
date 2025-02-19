@@ -1,4 +1,4 @@
-﻿using EasyGrocery.Application.Models;
+﻿using EasyGrocery.Api.Models;
 using FluentValidation;
 
 namespace EasyGrocery.Api.Validators

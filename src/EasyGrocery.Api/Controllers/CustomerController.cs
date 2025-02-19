@@ -1,7 +1,7 @@
-﻿using EasyGrocery.Api.Validators;
+﻿using EasyGrocery.Api.Models;
+using EasyGrocery.Api.Validators;
 using EasyGrocery.Application.Handlers.CustomerHandler.Commands;
 using EasyGrocery.Application.Handlers.CustomerHandler.Queries;
-using EasyGrocery.Application.Models;
 using EasyGrocery.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

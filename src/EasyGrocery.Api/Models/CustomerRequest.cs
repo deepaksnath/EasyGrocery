@@ -1,8 +1,6 @@
-﻿using MediatR;
-
-namespace EasyGrocery.Application.Models
+﻿namespace EasyGrocery.Api.Models
 {
-    public class CustomerRequest : IRequest<bool>
+    public class CustomerRequest
     {
         public Guid Id { get; set; }
         public string? Name { get; set; }
