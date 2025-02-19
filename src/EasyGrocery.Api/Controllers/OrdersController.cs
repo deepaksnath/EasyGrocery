@@ -12,11 +12,19 @@ namespace EasyGrocery.Api.Controllers
     {
         [HttpPost]
         [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Post([FromBody] OrderModel orderModel)
         {
             AddOrderCommand command = new(orderModel);
             var id = await _mediator.Send(command);
-            return StatusCode(StatusCodes.Status201Created, id);
+            if(id == Guid.Empty)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status201Created, id);
+            }
         }
     }
 }
