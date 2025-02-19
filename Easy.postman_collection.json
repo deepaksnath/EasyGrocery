@@ -1,0 +1,450 @@
+{
+	"info": {
+		"_postman_id": "117250a7-5e27-4ebc-aa19-1a986e749a6c",
+		"name": "Easy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39034829"
+	},
+	"item": [
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Add Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response\r",
+									"pm.collectionVariables.set(\"customerId\", pm.response.text());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Deepak\",\r\n  \"email\": \"deepak@in.com\",\r\n  \"phone\": \"7894561230\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7079/api/customers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7079/api/customers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7079/api/customers/3a92bd57-d551-4301-9c3c-b65cf5dc0a43",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"customers",
+								"3a92bd57-d551-4301-9c3c-b65cf5dc0a43"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7079/api/customers/ed5f06db-ce34-4ba5-9394-3199cc468489",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"customers",
+								"ed5f06db-ce34-4ba5-9394-3199cc468489"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": \"3a92bd57-d551-4301-9c3c-b65cf5dc0a43\",\r\n    \"name\": \"Deepak S Nath\",\r\n    \"email\": \"deepak@in.com\",\r\n    \"phone\": \"7894561230\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7079/api/customers/3a92bd57-d551-4301-9c3c-b65cf5dc0a43",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"customers",
+								"3a92bd57-d551-4301-9c3c-b65cf5dc0a43"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Add Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response\r",
+									"pm.collectionVariables.set(\"productId\", pm.response.text());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Car\",\r\n    \"description\": \"toy car\",\r\n    \"price\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7079/api/products",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Car\",\r\n    \"description\": \"toy car\",\r\n    \"price\": 200,\r\n    \"id\": \"cd831d0a-05d7-44a8-bffe-f932edbb5b98\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7079/api/products/cd831d0a-05d7-44a8-bffe-f932edbb5b98",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"products",
+								"cd831d0a-05d7-44a8-bffe-f932edbb5b98"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7079/api/products",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By Id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7079/api/products/cd831d0a-05d7-44a8-bffe-f932edbb5b98",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"products",
+								"cd831d0a-05d7-44a8-bffe-f932edbb5b98"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7079/api/products/cd831d0a-05d7-44a8-bffe-f932edbb5b98",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"products",
+								"cd831d0a-05d7-44a8-bffe-f932edbb5b98"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart Items",
+			"item": [
+				{
+					"name": "Add Cart Item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": {{customerId}},\r\n  \"productId\": {{productId}},\r\n  \"quantity\": 1,\r\n  \"price\": 150\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7079/api/cartitems",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"cartitems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Cart Item",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"customerId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n        \"productId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n        \"quantity\": 1,\r\n        \"price\": 205,\r\n        \"id\": \"8a6038cc-f4ac-47ae-bda8-3d8282cde1da\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7079/api/cartitems/8a6038cc-f4ac-47ae-bda8-3d8282cde1da",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"cartitems",
+								"8a6038cc-f4ac-47ae-bda8-3d8282cde1da"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cart Items By Customer Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7079/api/cartitems/f854fc5b-9189-4e16-958e-cb1af12351f9",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"cartitems",
+								"f854fc5b-9189-4e16-958e-cb1af12351f9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": {{customerId}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7079/api/orders",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7079",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "customerId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "productId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
