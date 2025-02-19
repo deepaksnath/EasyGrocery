@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EasyGrocery.Infrastructure.Migrations
 {
-    [DbContext(typeof(SqlDbContext))]
+    [DbContext(typeof(EasyDbContext))]
     partial class SqlDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -6,9 +6,9 @@ namespace EasyGrocery.Infrastructure.Repositories
 {
     public class CartItemRepository : ICartItemRepository
     {
-        private readonly InMemoryDbContext _dbContext;
+        private readonly EasyDbContext _dbContext;
 
-        public CartItemRepository(InMemoryDbContext dbContext)
+        public CartItemRepository(EasyDbContext dbContext)
         {
             _dbContext = dbContext;
         }

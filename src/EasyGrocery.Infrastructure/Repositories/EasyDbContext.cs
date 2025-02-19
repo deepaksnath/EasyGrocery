@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyGrocery.Infrastructure.Repositories
 {
-    public class SqlDbContext : DbContext
+    public class EasyDbContext : DbContext
     {
-        public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
+        public EasyDbContext(DbContextOptions<EasyDbContext> options) : base(options)
         {
         }
         public DbSet<Customer> Customers { get; set; }

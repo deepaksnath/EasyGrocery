@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EasyGrocery.Infrastructure.Migrations
 {
-    [DbContext(typeof(SqlDbContext))]
+    [DbContext(typeof(EasyDbContext))]
     [Migration("20250218201359_InitialMigration")]
     partial class InitialMigration
     {

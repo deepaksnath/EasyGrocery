@@ -5,9 +5,9 @@ namespace EasyGrocery.Infrastructure.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
-        private readonly InMemoryDbContext _dbContext;
+        private readonly EasyDbContext _dbContext;
 
-        public OrderRepository(InMemoryDbContext dbContext)
+        public OrderRepository(EasyDbContext dbContext)
         {
             _dbContext = dbContext;
         }
