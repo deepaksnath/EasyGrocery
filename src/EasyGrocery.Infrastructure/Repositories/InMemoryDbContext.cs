@@ -11,5 +11,6 @@ namespace EasyGrocery.Infrastructure.Repositories
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

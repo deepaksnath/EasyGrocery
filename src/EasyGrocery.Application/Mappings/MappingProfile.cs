@@ -24,6 +24,8 @@ namespace EasyGrocery.Application.Mappings
             CreateMap<CartItemModel, CartItem>().ReverseMap();
             CreateMap<UpdateCartItemCommand, CartItemModel>().ReverseMap();
             CreateMap<AddCartItemCommand, CartItemModel>().ReverseMap();
+
+            CreateMap<OrderModel, Order>().ReverseMap();
         }
     }
 }

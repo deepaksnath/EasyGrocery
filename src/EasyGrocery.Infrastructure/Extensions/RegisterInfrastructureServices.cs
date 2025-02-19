@@ -21,6 +21,8 @@ namespace EasyGrocery.Infrastructure.Extensions
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICartItemRepository, CartItemRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
             return services;
         }
     }
