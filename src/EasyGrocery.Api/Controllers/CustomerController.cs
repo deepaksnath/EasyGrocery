@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using EasyGrocery.Application.Handlers.CustomerHandler.Commands;
+﻿using EasyGrocery.Application.Handlers.CustomerHandler.Commands;
 using EasyGrocery.Application.Handlers.CustomerHandler.Queries;
 using EasyGrocery.Application.Models;
 using EasyGrocery.Domain.Entities;
@@ -11,7 +10,7 @@ namespace EasyGrocery.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController(IMediator _mediator, IMapper _mapper) : ControllerBase
+    public class CustomerController(IMediator _mediator) : ControllerBase
     {
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Customer>), (int)HttpStatusCode.OK)]
@@ -24,12 +23,11 @@ namespace EasyGrocery.Api.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Get(Guid id)
         {
             if (id == Guid.Empty)
             {
-                return BadRequest();
+                throw new ArgumentNullException(id.ToString());
             }
             Customer? customer = await _mediator.Send(new GetCustomerByIdQuery(id));
             if (customer is not null)
@@ -41,25 +39,23 @@ namespace EasyGrocery.Api.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
-        [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Post([FromBody] CustomerModel customerModel)
         {
-            AddCustomerCommand command = _mapper.Map<AddCustomerCommand>(customerModel);
+            AddCustomerCommand command = new(customerModel);
             var id = await _mediator.Send(command);
-            if (!id.Equals(Guid.Empty))
-            {
-                return StatusCode(StatusCodes.Status201Created, id);
-            }
-            return BadRequest();
+            return StatusCode(StatusCodes.Status201Created, id);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> Put([FromBody] CustomerModel customerModel)
+        public async Task<IActionResult> Put(Guid id, [FromBody] CustomerModel customerModel)
         {
-
-            UpdateCustomerCommand command = _mapper.Map<UpdateCustomerCommand>(customerModel);
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentNullException(id.ToString());
+            }
+            UpdateCustomerCommand command = new(customerModel);
             bool response = await _mediator.Send(command);
             if (response)
             {
@@ -71,17 +67,16 @@ namespace EasyGrocery.Api.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Delete(Guid id)
         {
             if (id == Guid.Empty)
             {
-                return BadRequest();
+                throw new ArgumentNullException(id.ToString());
             }
             bool response = await _mediator.Send(new DeleteCustomerCommand(id));
             if (response)
             {
-                return StatusCode(StatusCodes.Status204NoContent);
+                return StatusCode(StatusCodes.Status200OK);
             }
             return NotFound();
         }

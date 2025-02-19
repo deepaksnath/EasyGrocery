@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EasyGrocery.Application.Handlers.CustomerHandler.Commands;
+using EasyGrocery.Application.Models;
 using EasyGrocery.Domain.Entities;
 using EasyGrocery.Domain.Repositories;
 using FluentAssertions;
@@ -16,7 +17,7 @@ namespace EasyGrocery.UnitTest.Application.Handlers.CustomerHandlers
         public CreateCustomerCommandHandlerTests()
         {
             _customerRepository = new Mock<ICustomerRepository>();
-            _addCustomerCommand = new AddCustomerCommand();
+            _addCustomerCommand = new AddCustomerCommand(new CustomerModel());
             _mapper = new Mock<IMapper>();
         }
         [Fact]

@@ -9,9 +9,9 @@ namespace EasyGrocery.Application.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<AddCustomerCommand, Customer>().ReverseMap();
+            CreateMap<CustomerModel, Customer>().ReverseMap();
             CreateMap<AddCustomerCommand, CustomerModel>().ReverseMap();
-            CreateMap<UpdateCustomerCommand, Customer>().ReverseMap();
+            CreateMap<CustomerModel, Customer>().ReverseMap();
             CreateMap<UpdateCustomerCommand, CustomerModel>().ReverseMap();
         }
     }

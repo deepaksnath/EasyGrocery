@@ -7,9 +7,7 @@ namespace EasyGrocery.Infrastructure.Repositories
     {
         public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
         {
-
         }
-
         public DbSet<Customer> Customers { get; set; }
 
     }
