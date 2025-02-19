@@ -13,10 +13,14 @@ namespace EasyGrocery.Api.Extensions
             //Application
             builder.Services.RegisterAppServices();
 
+            //Global Exception Handling
+            builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+            builder.Services.AddProblemDetails();
+
             //Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+                        
             return builder;
         }
     }
