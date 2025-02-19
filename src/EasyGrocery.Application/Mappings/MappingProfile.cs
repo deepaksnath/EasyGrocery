@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EasyGrocery.Application.Handlers.CartItemHandler.Commands;
 using EasyGrocery.Application.Handlers.CustomerHandler.Commands;
 using EasyGrocery.Application.Handlers.ProductHandler.Commands;
 using EasyGrocery.Application.Models;
@@ -19,6 +20,10 @@ namespace EasyGrocery.Application.Mappings
             CreateMap<AddProductCommand, ProductModel>().ReverseMap();
             CreateMap<ProductModel, Product>().ReverseMap();
             CreateMap<UpdateProductCommand, ProductModel>().ReverseMap();
+
+            CreateMap<CartItemModel, CartItem>().ReverseMap();
+            CreateMap<UpdateCartItemCommand, CartItemModel>().ReverseMap();
+            CreateMap<AddCartItemCommand, CartItemModel>().ReverseMap();
         }
     }
 }

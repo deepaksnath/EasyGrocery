@@ -1,5 +1,5 @@
-﻿using EasyGrocery.Application.Handlers.ProductHandler.Commands;
-using EasyGrocery.Application.Handlers.ProductHandler.Queries;
+﻿using EasyGrocery.Application.Handlers.CustomerHandler.Commands;
+using EasyGrocery.Application.Handlers.CustomerHandler.Queries;
 using EasyGrocery.Application.Models;
 using EasyGrocery.Domain.Entities;
 using MediatR;
@@ -10,38 +10,38 @@ namespace EasyGrocery.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController(IMediator _mediator) : ControllerBase
+    public class CustomersController(IMediator _mediator) : ControllerBase
     {
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<Customer>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult> Get()
         {
-            var response = await _mediator.Send(new GetAllProductsQuery());
+            var response = await _mediator.Send(new GetAllCustomersQuery());
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Get(Guid id)
         {
             if (id == Guid.Empty)
             {
                 throw new ArgumentNullException(id.ToString());
             }
-            Product? product = await _mediator.Send(new GetProductByIdQuery(id));
-            if (product is not null)
+            Customer? customer = await _mediator.Send(new GetCustomerByIdQuery(id));
+            if (customer is not null)
             {
-                return Ok(product);
+                return Ok(customer);
             }
             return NotFound();
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
-        public async Task<IActionResult> Post([FromBody] ProductModel productModel)
+        public async Task<IActionResult> Post([FromBody] CustomerModel customerModel)
         {
-            AddProductCommand command = new(productModel);
+            AddCustomerCommand command = new(customerModel);
             var id = await _mediator.Send(command);
             return StatusCode(StatusCodes.Status201Created, id);
         }
@@ -49,13 +49,13 @@ namespace EasyGrocery.Api.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> Put(Guid id, [FromBody] ProductModel productModel)
+        public async Task<IActionResult> Put(Guid id, [FromBody] CustomerModel customerModel)
         {
             if (id == Guid.Empty)
             {
                 throw new ArgumentNullException(id.ToString());
             }
-            UpdateProductCommand command = new(productModel);
+            UpdateCustomerCommand command = new(customerModel);
             bool response = await _mediator.Send(command);
             if (response)
             {
@@ -73,7 +73,7 @@ namespace EasyGrocery.Api.Controllers
             {
                 throw new ArgumentNullException(id.ToString());
             }
-            bool response = await _mediator.Send(new DeleteProductCommand(id));
+            bool response = await _mediator.Send(new DeleteCustomerCommand(id));
             if (response)
             {
                 return StatusCode(StatusCodes.Status200OK);

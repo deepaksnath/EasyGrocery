@@ -21,7 +21,7 @@ namespace EasyGrocery.UnitTest.Api.Controllers
         public async Task Post_Should_Return_CreatedResponse_When_CustomerModelIsValid()
         {
             //Arrange
-            var customerController = new CustomerController(_moqMediator.Object);
+            var customerController = new CustomersController(_moqMediator.Object);
             _moqMediator.Setup(m => m.Send(It.IsAny<CustomerModel>(), It.IsAny<CancellationToken>()))
                         .ReturnsAsync(true);
 
@@ -38,7 +38,7 @@ namespace EasyGrocery.UnitTest.Api.Controllers
         public async Task Get_Should_Return_OkResponse_When_Customers()
         {
             //Arrange
-            var customerController = new CustomerController(_moqMediator.Object);
+            var customerController = new CustomersController(_moqMediator.Object);
             
             //Act
             var response = await customerController.Get();
@@ -53,7 +53,7 @@ namespace EasyGrocery.UnitTest.Api.Controllers
         public async Task Put_Should_Return_NotFoundResponse_When_CustomerDoesNotExist()
         {
             //Arrange
-            var customerController = new CustomerController(_moqMediator.Object);
+            var customerController = new CustomersController(_moqMediator.Object);
             _moqMediator.Setup(m => m.Send(It.IsAny<CustomerModel>(), It.IsAny<CancellationToken>()))
                         .ReturnsAsync(false);
 
@@ -70,7 +70,7 @@ namespace EasyGrocery.UnitTest.Api.Controllers
         public async Task Delete_Should_Return_NotFoundResponse_When_CustomerDoesNotExist()
         {
             //Arrange
-            var customerController = new CustomerController(_moqMediator.Object);
+            var customerController = new CustomersController(_moqMediator.Object);
             _moqMediator.Setup(m => m.Send(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                         .ReturnsAsync(false);
 
@@ -87,7 +87,7 @@ namespace EasyGrocery.UnitTest.Api.Controllers
         public async Task GetById_Should_Return_OkResponse_When_Customers()
         {
             //Arrange
-            var customerController = new CustomerController(_moqMediator.Object);
+            var customerController = new CustomersController(_moqMediator.Object);
             _moqMediator.Setup(m => m.Send(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
                         .ReturnsAsync(false);
 
