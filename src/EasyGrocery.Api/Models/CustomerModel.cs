@@ -1,6 +1,6 @@
 ﻿namespace EasyGrocery.Api.Models
 {
-    public class CustomerRequest
+    public class CustomerModel
     {
         public Guid Id { get; set; }
         public string? Name { get; set; }

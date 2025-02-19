@@ -42,10 +42,10 @@ namespace EasyGrocery.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> Post([FromBody] CustomerRequest customerRequest)
+        public async Task<IActionResult> Post([FromBody] CustomerModel customerModel)
         {
-            var validator = new CustomerRequestValidator();
-            var valResult = validator.Validate(customerRequest);
+            var validator = new CustomerModelValidator();
+            var valResult = validator.Validate(customerModel);
             if (!valResult.IsValid)
             {
                 return BadRequest(valResult.Errors);
@@ -53,10 +53,10 @@ namespace EasyGrocery.Api.Controllers
 
             AddCustomerCommand command = new()
             {
-                Name = customerRequest.Name,
-                Email = customerRequest.Email,
-                Phone = customerRequest.Phone,
-                HasLoyaltyMembership = customerRequest.HasLoyaltyMembership
+                Name = customerModel.Name,
+                Email = customerModel.Email,
+                Phone = customerModel.Phone,
+                HasLoyaltyMembership = customerModel.HasLoyaltyMembership
             };
             var newCustomer = await _mediator.Send(command);
             if (newCustomer is not null)
@@ -70,10 +70,10 @@ namespace EasyGrocery.Api.Controllers
         [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> Put([FromBody] CustomerRequest customerRequest)
+        public async Task<IActionResult> Put([FromBody] CustomerModel customerModel)
         {
-            var validator = new CustomerRequestValidator();
-            var valResult = validator.Validate(customerRequest);
+            var validator = new CustomerModelValidator();
+            var valResult = validator.Validate(customerModel);
             if (!valResult.IsValid)
             {
                 return BadRequest(valResult.Errors);
@@ -81,11 +81,11 @@ namespace EasyGrocery.Api.Controllers
 
             UpdateCustomerCommand command = new()
             {
-                Id = customerRequest.Id,
-                Name = customerRequest.Name,
-                Email = customerRequest.Email,
-                Phone = customerRequest.Phone,
-                HasLoyaltyMembership = customerRequest.HasLoyaltyMembership
+                Id = customerModel.Id,
+                Name = customerModel.Name,
+                Email = customerModel.Email,
+                Phone = customerModel.Phone,
+                HasLoyaltyMembership = customerModel.HasLoyaltyMembership
             };
             Customer? newCustomer = await _mediator.Send(command);
             if (newCustomer is not null)
