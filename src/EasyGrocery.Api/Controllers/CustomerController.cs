@@ -1,7 +1,7 @@
-﻿using EasyGrocery.Api.Models;
-using EasyGrocery.Api.Validators;
+﻿using AutoMapper;
 using EasyGrocery.Application.Handlers.CustomerHandler.Commands;
 using EasyGrocery.Application.Handlers.CustomerHandler.Queries;
+using EasyGrocery.Application.Models;
 using EasyGrocery.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +11,7 @@ namespace EasyGrocery.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController(IMediator _mediator) : ControllerBase
+    public class CustomerController(IMediator _mediator, IMapper _mapper) : ControllerBase
     {
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Customer>), (int)HttpStatusCode.OK)]
@@ -40,60 +40,48 @@ namespace EasyGrocery.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Post([FromBody] CustomerModel customerModel)
         {
-            AddCustomerCommand command = new()
+            AddCustomerCommand command = _mapper.Map<AddCustomerCommand>(customerModel);
+            var id = await _mediator.Send(command);
+            if (!id.Equals(Guid.Empty))
             {
-                Name = customerModel.Name,
-                Email = customerModel.Email,
-                Phone = customerModel.Phone,
-                HasLoyaltyMembership = customerModel.HasLoyaltyMembership
-            };
-            var newCustomer = await _mediator.Send(command);
-            if (newCustomer is not null)
-            {
-                return Ok(newCustomer);
+                return StatusCode(StatusCodes.Status201Created, id);
             }
             return BadRequest();
         }
 
         [HttpPut]
-        [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Put([FromBody] CustomerModel customerModel)
         {
-            UpdateCustomerCommand command = new()
+
+            UpdateCustomerCommand command = _mapper.Map<UpdateCustomerCommand>(customerModel);
+            bool response = await _mediator.Send(command);
+            if (response)
             {
-                Id = customerModel.Id,
-                Name = customerModel.Name,
-                Email = customerModel.Email,
-                Phone = customerModel.Phone,
-                HasLoyaltyMembership = customerModel.HasLoyaltyMembership
-            };
-            Customer? newCustomer = await _mediator.Send(command);
-            if (newCustomer is not null)
-            {
-                return Ok(newCustomer);
+                return StatusCode(StatusCodes.Status204NoContent);
             }
             return NotFound();
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Delete(Guid id)
         {
             if (id == Guid.Empty)
             {
                 return BadRequest();
             }
-            Customer? customer = await _mediator.Send(new DeleteCustomerCommand(id));
-            if (customer is not null)
+            bool response = await _mediator.Send(new DeleteCustomerCommand(id));
+            if (response)
             {
-                return Ok(customer);
+                return StatusCode(StatusCodes.Status204NoContent);
             }
             return NotFound();
         }

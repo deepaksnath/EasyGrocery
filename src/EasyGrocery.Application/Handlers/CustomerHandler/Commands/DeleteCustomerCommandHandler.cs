@@ -1,13 +1,12 @@
-﻿using EasyGrocery.Domain.Entities;
-using EasyGrocery.Domain.Repositories;
+﻿using EasyGrocery.Domain.Repositories;
 using MediatR;
 
 namespace EasyGrocery.Application.Handlers.CustomerHandler.Commands
 {
     public class DeleteCustomerCommandHandler(ICustomerRepository customerRepository) :
-        IRequestHandler<DeleteCustomerCommand, Customer?>
+        IRequestHandler<DeleteCustomerCommand, bool>
     {
-        public async Task<Customer?> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
         {
             return await customerRepository.DeleteCustomer(request.Id);
         }

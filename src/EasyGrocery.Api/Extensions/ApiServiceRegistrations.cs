@@ -1,5 +1,6 @@
 ﻿using EasyGrocery.Application.Extensions;
 using EasyGrocery.Infrastructure.Extensions;
+using System.Reflection;
 
 namespace EasyGrocery.Api.Extensions
 {
@@ -20,7 +21,10 @@ namespace EasyGrocery.Api.Extensions
             //Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-                        
+
+            //Mapper
+            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             return builder;
         }
     }

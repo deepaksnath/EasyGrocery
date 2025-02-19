@@ -1,4 +1,5 @@
-﻿using EasyGrocery.Application.Handlers.CustomerHandler.Commands;
+﻿using AutoMapper;
+using EasyGrocery.Application.Handlers.CustomerHandler.Commands;
 using EasyGrocery.Domain.Entities;
 using EasyGrocery.Domain.Repositories;
 using FluentAssertions;
@@ -10,11 +11,12 @@ namespace EasyGrocery.UnitTest.Application.Handlers.CustomerHandlers
     {
         private readonly Mock<ICustomerRepository> _customerRepository;
         private readonly UpdateCustomerCommand _updateCustomerCommand;
-
+        private readonly Mock<IMapper> _mapper;
         public UpdateCustomerCommandHandlerTests()
         {
             _customerRepository = new Mock<ICustomerRepository>();
             _updateCustomerCommand = new UpdateCustomerCommand();
+            _mapper = new Mock<IMapper>();
         }
 
         [Fact]
@@ -22,8 +24,8 @@ namespace EasyGrocery.UnitTest.Application.Handlers.CustomerHandlers
         {
             //Arrange
             _customerRepository.Setup(x => x.UpdateCustomers(It.IsAny<Customer>()))
-                                                     .ReturnsAsync(new Customer());
-            var customerCommandHandler = new UpdateCustomerCommandHandler(_customerRepository.Object);
+                                                     .ReturnsAsync(true);
+            var customerCommandHandler = new UpdateCustomerCommandHandler(_customerRepository.Object, _mapper.Object);
 
             //Act
             var response = customerCommandHandler.Handle(_updateCustomerCommand, default);
@@ -36,16 +38,15 @@ namespace EasyGrocery.UnitTest.Application.Handlers.CustomerHandlers
         public void UpdateCustomerCommandHandler_Should_Return_Null_When_CustomerDoesNotExist()
         {
             //Arrange
-            Customer? customer = null;
             _customerRepository.Setup(x => x.UpdateCustomers(It.IsAny<Customer>()))
-                                                     .ReturnsAsync(customer);
-            var customerCommandHandler = new UpdateCustomerCommandHandler(_customerRepository.Object);
+                                                     .ReturnsAsync(false);
+            var customerCommandHandler = new UpdateCustomerCommandHandler(_customerRepository.Object, _mapper.Object);
 
             //Act
             var response = customerCommandHandler.Handle(_updateCustomerCommand, default);
 
             //Assert
-            response!.Result.Should().BeNull();
+            response!.Result.Should().BeFalse();
         }
     }
 }

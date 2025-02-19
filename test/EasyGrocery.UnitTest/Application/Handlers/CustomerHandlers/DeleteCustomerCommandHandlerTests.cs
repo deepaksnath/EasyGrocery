@@ -21,7 +21,7 @@ namespace EasyGrocery.UnitTest.Application.Handlers.CustomerHandlers
         {
             //Arrange
             _customerRepository.Setup(x => x.DeleteCustomer(It.IsAny<Guid>()))
-                                                     .ReturnsAsync(new Customer());
+                                                     .ReturnsAsync(true);
             var customerCommandHandler = new DeleteCustomerCommandHandler(_customerRepository.Object);
 
             //Act
@@ -35,16 +35,15 @@ namespace EasyGrocery.UnitTest.Application.Handlers.CustomerHandlers
         public void DeleteCustomerCommandHandler_Should_Return_Null_When_CustomerDoesNotExist()
         {
             //Arrange
-            Customer? customer = null;
             _customerRepository.Setup(x => x.DeleteCustomer(It.IsAny<Guid>()))
-                                                     .ReturnsAsync(customer);
+                                                     .ReturnsAsync(false);
             var customerCommandHandler = new DeleteCustomerCommandHandler(_customerRepository.Object);
 
             //Act
             var response = customerCommandHandler.Handle(_deleteCustomerCommand, default);
 
             //Assert
-            response!.Result.Should().BeNull();
+            response!.Result.Should().BeFalse();
         }
     }
 }

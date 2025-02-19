@@ -24,34 +24,34 @@ namespace EasyGrocery.Infrastructure.Repositories
             return await _sqlDbContext.Customers.FindAsync(id);
         }
 
-        public async Task<Customer> AddCustomers(Customer customer)
+        public async Task<Guid> AddCustomers(Customer customer)
         {
             _sqlDbContext.Customers.Add(customer);
             await _sqlDbContext.SaveChangesAsync();
-            return customer;
+            return customer.Id;
         }
 
-        public async Task<Customer?> UpdateCustomers(Customer customer)
+        public async Task<bool> UpdateCustomers(Customer customer)
         {
             if (CustomerExists(customer.Id))
             {
                 _sqlDbContext.Update(customer);
                 await _sqlDbContext.SaveChangesAsync();
-                return customer;
+                return true;
             }
-            return null;
+            return false;
         }
 
-        public async Task<Customer?> DeleteCustomer(Guid id)
+        public async Task<bool> DeleteCustomer(Guid id)
         {
             var customer = await _sqlDbContext.Customers.FindAsync(id);
             if (customer is not null)
             {
                 _sqlDbContext.Customers.Remove(customer);
                 await _sqlDbContext.SaveChangesAsync();
-                return customer;
+                return true;
             }
-            return null;
+            return false;
         }
 
         private bool CustomerExists(Guid id)

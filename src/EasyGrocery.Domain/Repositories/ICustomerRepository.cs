@@ -6,8 +6,8 @@ namespace EasyGrocery.Domain.Repositories
     {
         Task<IEnumerable<Customer>> GetCustomers();
         Task<Customer?> GetCustomerById(Guid id);
-        Task<Customer> AddCustomers(Customer customer);
-        Task<Customer?> UpdateCustomers(Customer customer);
-        Task<Customer?> DeleteCustomer(Guid id);
+        Task<Guid> AddCustomers(Customer customer);
+        Task<bool> UpdateCustomers(Customer customer);
+        Task<bool> DeleteCustomer(Guid id);
     }
 }

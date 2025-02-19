@@ -1,25 +1,19 @@
-﻿using EasyGrocery.Domain.Entities;
+﻿using AutoMapper;
+using EasyGrocery.Domain.Entities;
 using EasyGrocery.Domain.Repositories;
 using MediatR;
 
 namespace EasyGrocery.Application.Handlers.CustomerHandler.Commands
 {
-    public class UpdateCustomerCommandHandler(ICustomerRepository customerRepository) :
-                 IRequestHandler<UpdateCustomerCommand, Customer?>
+    public class UpdateCustomerCommandHandler(ICustomerRepository customerRepository, IMapper mapper) :
+                 IRequestHandler<UpdateCustomerCommand, bool>
     {
-        public async Task<Customer?> Handle(UpdateCustomerCommand command, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdateCustomerCommand command, CancellationToken cancellationToken)
         {
-            Customer customer = new()
-            {
-                Id = command.Id,
-                Name = command.Name,
-                Email = command.Email,
-                Phone = command.Phone,
-                HasLoyaltyMembership = command.HasLoyaltyMembership
-            };
-            Customer? newCustomer = await customerRepository.UpdateCustomers(customer);
+            Customer customer = mapper.Map<Customer>(command);
+            bool response = await customerRepository.UpdateCustomers(customer);
 
-            return newCustomer;
+            return response;
         }
     }
 }
