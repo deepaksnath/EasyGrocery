@@ -30,7 +30,7 @@ namespace EasyGrocery.UnitTest.Api.Controllers
 
             //Assert
             response.Should().NotBeNull();
-            var result = Assert.IsType<BadRequestObjectResult>(response);
+            var result = Assert.IsType<BadRequestResult>(response);
             result.StatusCode.Should().Be((int)HttpStatusCode.BadRequest);
         }
 

@@ -44,13 +44,6 @@ namespace EasyGrocery.Api.Controllers
         [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Post([FromBody] CustomerModel customerModel)
         {
-            var validator = new CustomerModelValidator();
-            var valResult = validator.Validate(customerModel);
-            if (!valResult.IsValid)
-            {
-                return BadRequest(valResult.Errors);
-            }
-
             AddCustomerCommand command = new()
             {
                 Name = customerModel.Name,
@@ -69,16 +62,8 @@ namespace EasyGrocery.Api.Controllers
         [HttpPut]
         [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Put([FromBody] CustomerModel customerModel)
         {
-            var validator = new CustomerModelValidator();
-            var valResult = validator.Validate(customerModel);
-            if (!valResult.IsValid)
-            {
-                return BadRequest(valResult.Errors);
-            }
-
             UpdateCustomerCommand command = new()
             {
                 Id = customerModel.Id,
