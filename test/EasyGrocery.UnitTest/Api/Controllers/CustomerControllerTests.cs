@@ -51,5 +51,57 @@ namespace EasyGrocery.UnitTest.Api.Controllers
             var result = Assert.IsType<OkObjectResult>(response);
             result.StatusCode.Should().Be((int)HttpStatusCode.OK);
         }
+
+        [Fact]
+        public async Task Put_Should_Return_NotFoundResponse_When_CustomerDoesNotExist()
+        {
+            //Arrange
+            var customerController = new CustomerController(_moqMediator.Object, _mapper.Object);
+            _moqMediator.Setup(m => m.Send(It.IsAny<CustomerModel>(), It.IsAny<CancellationToken>()))
+                        .ReturnsAsync(false);
+
+            //Act
+            var response = await customerController.Put(new CustomerModel());
+
+            //Assert
+            response.Should().NotBeNull();
+            var result = Assert.IsType<NotFoundResult>(response);
+            result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
+        }
+
+        [Fact]
+        public async Task Delete_Should_Return_NotFoundResponse_When_CustomerDoesNotExist()
+        {
+            //Arrange
+            var customerController = new CustomerController(_moqMediator.Object, _mapper.Object);
+            _moqMediator.Setup(m => m.Send(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                        .ReturnsAsync(false);
+
+            //Act
+            var response = await customerController.Delete(Guid.NewGuid());
+
+            //Assert
+            response.Should().NotBeNull();
+            var result = Assert.IsType<NotFoundResult>(response);
+            result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
+        }
+
+        [Fact]
+        public async Task GetById_Should_Return_OkResponse_When_Customers()
+        {
+            //Arrange
+            var customerController = new CustomerController(_moqMediator.Object, _mapper.Object);
+            _moqMediator.Setup(m => m.Send(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+                        .ReturnsAsync(false);
+
+            //Act
+            var response = await customerController.Get(Guid.NewGuid());
+
+            //Assert
+            response.Should().NotBeNull();
+            var result = Assert.IsType<NotFoundResult>(response);
+            result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
+        }
+
     }
 }
