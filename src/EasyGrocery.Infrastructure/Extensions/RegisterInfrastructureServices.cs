@@ -19,6 +19,7 @@ namespace EasyGrocery.Infrastructure.Extensions
             services.AddScoped<InMemoryDbContext>();
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             return services;
         }
     }
