@@ -33,27 +33,13 @@ namespace EasyGrocery.Infrastructure.Repositories
 
         public async Task<Customer?> UpdateCustomers(Customer customer)
         {
-            try
+            if (CustomerExists(customer.Id))
             {
-                if (CustomerExists(customer.Id))
-                {
-                    _sqlDbContext.Update(customer);
-                    await _sqlDbContext.SaveChangesAsync();
-                    return customer;
-                }
-                return null;
+                _sqlDbContext.Update(customer);
+                await _sqlDbContext.SaveChangesAsync();
+                return customer;
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CustomerExists(customer.Id))
-                {
-                    return null;
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            return null;
         }
 
         public async Task<Customer?> DeleteCustomer(Guid id)
