@@ -1,16 +1,10 @@
-﻿using MediatR;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace EasyGrocery.Application.Models
+﻿namespace EasyGrocery.Application.Models
 {
-    public class OrderModel : IRequest<bool>
+    public class OrderModel 
     {
         public Guid Id { get; set; }
         public Guid CustomerId { get; set; }
-        public DateTime OrderDate { get; set; }
+        public DateTime OrderDate { get; set; } = DateTime.Now;
         public decimal TotalAmount { get; set; }
-        [NotMapped]
-        public bool IsLoyaltyMembershipAdded { get; set; }
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }
