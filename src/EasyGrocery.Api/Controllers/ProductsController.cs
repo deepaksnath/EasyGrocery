@@ -66,6 +66,7 @@ namespace EasyGrocery.Api.Controllers
 
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Delete(Guid id)
         {
             if (id == Guid.Empty)
