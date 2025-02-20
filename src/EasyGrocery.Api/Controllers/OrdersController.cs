@@ -19,7 +19,7 @@ namespace EasyGrocery.Api.Controllers
             var id = await _mediator.Send(command);
             if(id == Guid.Empty)
             {
-                return NotFound();
+                return NotFound("No Products found in the cart.");
             }
             else
             {

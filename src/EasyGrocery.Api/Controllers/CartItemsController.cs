@@ -19,7 +19,7 @@ namespace EasyGrocery.Api.Controllers
         {
             if (id == Guid.Empty)
             {
-                throw new ArgumentNullException(id.ToString());
+                throw new ArgumentNullException(nameof(id));
             }
             var cartItems = await _mediator.Send(new GetCartItemsByCustomerIdQuery(id));
             if (cartItems is not null)
@@ -45,7 +45,7 @@ namespace EasyGrocery.Api.Controllers
         {
             if (id == Guid.Empty)
             {
-                throw new ArgumentNullException(id.ToString());
+                throw new ArgumentNullException(nameof(id));
             }
             UpdateCartItemCommand command = new(cartItemModel);
             bool response = await _mediator.Send(command);

@@ -27,7 +27,7 @@ namespace EasyGrocery.Api.Controllers
         {
             if (id == Guid.Empty)
             {
-                throw new ArgumentNullException(id.ToString());
+                throw new ArgumentNullException(nameof(id));
             }
             Customer? customer = await _mediator.Send(new GetCustomerByIdQuery(id));
             if (customer is not null)
@@ -53,7 +53,7 @@ namespace EasyGrocery.Api.Controllers
         {
             if (id == Guid.Empty)
             {
-                throw new ArgumentNullException(id.ToString());
+                throw new ArgumentNullException(nameof(id));
             }
             UpdateCustomerCommand command = new(customerModel);
             bool response = await _mediator.Send(command);
@@ -70,14 +70,14 @@ namespace EasyGrocery.Api.Controllers
         {
             if (id == Guid.Empty)
             {
-                throw new ArgumentNullException(id.ToString());
+                throw new ArgumentNullException(nameof(id));
             }
             bool response = await _mediator.Send(new DeleteCustomerCommand(id));
             if (response)
             {
                 return StatusCode(StatusCodes.Status200OK);
             }
-            throw new ArgumentException("Customer id doesn't exist.");
+            return NotFound("Customer doesn't exist.");
         }
 
     }

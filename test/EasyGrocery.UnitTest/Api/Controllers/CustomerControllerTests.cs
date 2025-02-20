@@ -67,7 +67,7 @@ namespace EasyGrocery.UnitTest.Api.Controllers
         }
 
         [Fact]
-        public async Task Delete_Should_Throw_ArgumentException_When_CustomerDoesNotExist()
+        public async Task Delete_Should_Return_NotFoundResponse_When_CustomerDoesNotExist()
         {
             //Arrange
             var customerController = new CustomersController(_moqMediator.Object);
@@ -75,11 +75,12 @@ namespace EasyGrocery.UnitTest.Api.Controllers
                         .ReturnsAsync(false);
 
             //Act
-            Func<Task> act = () => customerController.Delete(Guid.NewGuid());
+            var response = await customerController.Delete(Guid.NewGuid());
 
             //Assert
-            var exception = await Assert.ThrowsAsync<ArgumentException>(act);
-            exception.Should().NotBeNull();
+            response.Should().NotBeNull();
+            var result = Assert.IsType<NotFoundObjectResult>(response);
+            result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
         }
 
         [Fact]
