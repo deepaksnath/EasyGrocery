@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace EasyGrocery.Application.Models
+﻿namespace EasyGrocery.Application.Models
 {
     public class OrderModel 
     {

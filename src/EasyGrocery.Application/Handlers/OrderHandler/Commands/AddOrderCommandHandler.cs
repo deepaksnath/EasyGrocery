@@ -21,10 +21,11 @@ namespace EasyGrocery.Application.Handlers.OrderHandler.Commands
                 var customer = await customerRepository.GetCustomerById(order.CustomerId);
                 var cartItems = await cartItemRepository.GetCartItemsByCustomerAsync(order.CustomerId);
                 if (customer is not null &&
-                        cartItems is not null &&
-                        cartItems.Any(i => i.Quantity > 0))
+                    cartItems is not null &&
+                    cartItems.Any(i => i.Quantity > 0))
                 {
-                    if (order.IsLoyaltyMembershipAdded)
+                    if (order.IsLoyaltyMembershipAdded &&
+                        !customer.HasLoyaltyMembership)
                     {
                         cartItems.Add(new()
                         {
@@ -44,8 +45,8 @@ namespace EasyGrocery.Application.Handlers.OrderHandler.Commands
                         {
                             cartItem.ProductId = Guid.NewGuid();
                             unitPrice = customer.HasLoyaltyMembership ?
-                                    (unitPrice - (unitPrice * discount)) :
-                                    unitPrice;
+                                        (unitPrice - (unitPrice * discount)) :
+                                        unitPrice;
                         }
                         OrderItem orderItem = new()
                         {
