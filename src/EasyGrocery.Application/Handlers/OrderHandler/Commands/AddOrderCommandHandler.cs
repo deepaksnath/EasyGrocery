@@ -15,7 +15,7 @@ namespace EasyGrocery.Application.Handlers.OrderHandler.Commands
     {
         public async Task<Guid> Handle(AddOrderCommand command, CancellationToken cancellationToken)
         {
-            Order order = mapper.Map<Order>(command.orderModel);
+            Order order = mapper.Map<Order>(command.OrderModel);
             if (order.CustomerId != Guid.Empty)
             {
                 var customer = await customerRepository.GetCustomerById(order.CustomerId);

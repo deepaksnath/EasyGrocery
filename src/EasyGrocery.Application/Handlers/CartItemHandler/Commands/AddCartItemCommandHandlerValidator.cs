@@ -6,11 +6,11 @@ namespace EasyGrocery.Application.Handlers.CartItemHandler.Commands
     {
         public AddCartItemCommandHandlerValidator()
         {
-            RuleFor(CartItem => CartItem.cartItemModel)
+            RuleFor(CartItem => CartItem.CartItemModel)
                 .NotNull().WithMessage("Cart item info is required");
-            RuleFor(CartItem => CartItem.cartItemModel.ProductId)
+            RuleFor(CartItem => CartItem.CartItemModel.ProductId)
                 .NotEmpty().WithMessage("Product id is required");
-            RuleFor(CartItem => CartItem.cartItemModel.CustomerId)
+            RuleFor(CartItem => CartItem.CartItemModel.CustomerId)
                 .NotEmpty().WithMessage("Customer id is required");
         }
     }

@@ -6,13 +6,13 @@ namespace EasyGrocery.Application.Handlers.ProductHandler.Commands
     {
         public UpdateProductCommandHandlerValidator()
         {
-            RuleFor(Product => Product.productModel)
+            RuleFor(Product => Product.ProductModel)
                 .NotNull().WithMessage("Product info is required");
-            RuleFor(Product => Product.productModel.Id)
+            RuleFor(Product => Product.ProductModel.Id)
                 .NotEmpty().WithMessage("Id is required");
-            RuleFor(Product => Product.productModel.Name)
+            RuleFor(Product => Product.ProductModel.Name)
                 .NotEmpty().WithMessage("Name is required");
-            RuleFor(Product => Product.productModel.Price)
+            RuleFor(Product => Product.ProductModel.Price)
                 .NotEmpty().WithMessage("Price is required");
         }
     }

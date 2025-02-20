@@ -7,8 +7,8 @@ namespace EasyGrocery.Application.Handlers.OrderHandler.Commands
     {
         public AddOrderCommand(OrderModel? orderModel)
         {
-            this.orderModel = orderModel;
+            OrderModel = orderModel;
         }
-        public OrderModel? orderModel { get; set; }
+        public OrderModel? OrderModel { get; set; }
     }
 }

@@ -7,8 +7,8 @@ namespace EasyGrocery.Application.Handlers.ProductHandler.Commands
     {
         public UpdateProductCommand(ProductModel? productModel)
         {
-            this.productModel = productModel;
+            ProductModel = productModel;
         }
-        public ProductModel? productModel { get; set; }
+        public ProductModel? ProductModel { get; set; }
     }
 }

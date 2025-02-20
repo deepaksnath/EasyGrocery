@@ -65,8 +65,7 @@ namespace EasyGrocery.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<IActionResult> Delete(Guid id)
         {
             if (id == Guid.Empty)
@@ -78,7 +77,7 @@ namespace EasyGrocery.Api.Controllers
             {
                 return StatusCode(StatusCodes.Status200OK);
             }
-            return NotFound();
+            throw new ArgumentException("Customer id doesn't exist.");
         }
 
     }

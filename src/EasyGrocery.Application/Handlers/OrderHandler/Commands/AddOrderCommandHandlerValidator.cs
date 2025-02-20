@@ -6,9 +6,9 @@ namespace EasyGrocery.Application.Handlers.OrderHandler.Commands
     {
         public AddOrderCommandHandlerValidator()
         {
-            RuleFor(Order => Order.orderModel)
+            RuleFor(Order => Order.OrderModel)
                 .NotNull().WithMessage("Order info is required");
-            RuleFor(Order => Order.orderModel.CustomerId)
+            RuleFor(Order => Order.OrderModel.CustomerId)
                 .NotEmpty().WithMessage("CustomerId is required");
         }
     }

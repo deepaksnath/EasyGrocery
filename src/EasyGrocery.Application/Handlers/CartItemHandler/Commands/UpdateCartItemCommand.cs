@@ -7,8 +7,8 @@ namespace EasyGrocery.Application.Handlers.CartItemHandler.Commands
     {
         public UpdateCartItemCommand(CartItemModel? cartItemModel)
         {
-            this.cartItemModel = cartItemModel;
+            CartItemModel = cartItemModel;
         }
-        public CartItemModel? cartItemModel { get; set; }
+        public CartItemModel? CartItemModel { get; set; }
     }
 }

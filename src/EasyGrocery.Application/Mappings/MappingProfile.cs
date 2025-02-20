@@ -12,19 +12,8 @@ namespace EasyGrocery.Application.Mappings
         public MappingProfile()
         {
             CreateMap<CustomerModel, Customer>().ReverseMap();
-            CreateMap<AddCustomerCommand, CustomerModel>().ReverseMap();
-            CreateMap<CustomerModel, Customer>().ReverseMap();
-            CreateMap<UpdateCustomerCommand, CustomerModel>().ReverseMap();
-
             CreateMap<ProductModel, Product>().ReverseMap();
-            CreateMap<AddProductCommand, ProductModel>().ReverseMap();
-            CreateMap<ProductModel, Product>().ReverseMap();
-            CreateMap<UpdateProductCommand, ProductModel>().ReverseMap();
-
             CreateMap<CartItemModel, CartItem>().ReverseMap();
-            CreateMap<UpdateCartItemCommand, CartItemModel>().ReverseMap();
-            CreateMap<AddCartItemCommand, CartItemModel>().ReverseMap();
-
             CreateMap<OrderModel, Order>().ReverseMap();
         }
     }

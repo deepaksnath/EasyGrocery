@@ -10,7 +10,7 @@ namespace EasyGrocery.Application.Handlers.CartItemHandler.Commands
     {
         public async Task<bool> Handle(UpdateCartItemCommand command, CancellationToken cancellationToken)
         {
-            CartItem cartItem = mapper.Map<CartItem>(command.cartItemModel);
+            CartItem cartItem = mapper.Map<CartItem>(command.CartItemModel);
             bool response = await cartItemRepository.UpdateCartItem(cartItem);
 
             return response;

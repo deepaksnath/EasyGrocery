@@ -10,7 +10,7 @@ namespace EasyGrocery.Application.Handlers.CustomerHandler.Commands
     {
         public async Task<bool> Handle(UpdateCustomerCommand command, CancellationToken cancellationToken)
         {
-            Customer customer = mapper.Map<Customer>(command.customerModel);
+            Customer customer = mapper.Map<Customer>(command.CustomerModel);
             bool response = await customerRepository.UpdateCustomers(customer);
 
             return response;
